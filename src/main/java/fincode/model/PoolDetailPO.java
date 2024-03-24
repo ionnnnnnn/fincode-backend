@@ -16,4 +16,7 @@ public class PoolDetailPO {
     private Integer pool_id;
 
     private Integer stock_id;
+
+    // 加策略
+    private Integer strategy_id;
 }

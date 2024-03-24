@@ -25,10 +25,12 @@ public interface PoolMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     public int createPool(@Param("stockPoolPO") StockPoolPO stockPoolPO);
 
+    // 加策略id
     @Insert("insert into pool_detail values(" +
             "#{poolDetailPO.id}, " +
             "#{poolDetailPO.pool_id}, " +
-            "#{poolDetailPO.stock_id})")
+            "#{poolDetailPO.stock_id})" +
+            "#{poolDetailPO.strategy_id})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     public int insertPoolContext(@Param("poolDetailPO")PoolDetailPO poolDetailPO);
 

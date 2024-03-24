@@ -249,5 +249,7 @@ create table `pool_detail` (
                                    `id` bigint NOT NULL AUTO_INCREMENT,
                                    `pool_id` bigint NOT NULL,
                                   `stock_id` int NOT NULL,
+                                  # 加策略id
+                                  `strategy_id` int NOT NULL,
                                   PRIMARY KEY (`id`)
 );
