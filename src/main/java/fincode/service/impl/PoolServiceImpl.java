@@ -129,7 +129,7 @@ public class PoolServiceImpl implements PoolService {
                 PoolDetailPO poolDetailPO = new PoolDetailPO();
                 poolDetailPO.setPool_id(stockPoolPO.getId());
                 poolDetailPO.setStock_id(stockTipDailyPO.getId());
-                int insert = poolMapper.insertPoolContext(poolDetailPO);
+                int insert = poolMapper.insertStockToPool(poolDetailPO);
                 res.addStockTip(stockTipDailyPO);
             }
 

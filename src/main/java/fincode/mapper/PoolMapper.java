@@ -32,7 +32,7 @@ public interface PoolMapper {
             "#{poolDetailPO.stock_id})" +
             "#{poolDetailPO.strategy_id})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
-    public int insertPoolContext(@Param("poolDetailPO")PoolDetailPO poolDetailPO);
+    public int insertStockToPool(@Param("poolDetailPO")PoolDetailPO poolDetailPO);
 
     @Delete("delete from stock_pool where user_id=#{user_id} and id=#{pool_id}")
     public int deletePool(int pool_id, int user_id);
