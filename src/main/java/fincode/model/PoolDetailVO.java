@@ -12,6 +12,7 @@ import java.util.List;
 
 @Data
 public class PoolDetailVO {
+    // todo 修改
     private Integer pool_id;
 
     private String pool_name;

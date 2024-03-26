@@ -34,6 +34,10 @@ public interface PoolMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     public int insertStockToPool(@Param("poolDetailPO")PoolDetailPO poolDetailPO);
 
+    // 查询某个股票池中是否有某一支股票
+    @Select("select * from pool_detail where pool_id=#{pool_id} and stock_id=#{stock_id}")
+    PoolDetailPO findOneStock(int pool_id, int stock_id);
+
     @Delete("delete from stock_pool where user_id=#{user_id} and id=#{pool_id}")
     public int deletePool(int pool_id, int user_id);
 

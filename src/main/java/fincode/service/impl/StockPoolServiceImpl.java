@@ -2,9 +2,8 @@ package fincode.service.impl;
 
 import fincode.mapper.PoolMapper;
 import fincode.mapper.StockMapper;
-import fincode.model.PoolDetailPO;
-import fincode.model.StockPoolPO;
-import fincode.model.StockVO;
+import fincode.model.*;
+import fincode.model.req.stockPool.PoolDetailCreateReq;
 import fincode.model.req.stockPool.StockPoolCreateReq;
 import fincode.model.req.stockPool.StockPoolDeleteReq;
 import fincode.service.StockPoolService;
@@ -48,16 +47,42 @@ public class StockPoolServiceImpl implements StockPoolService {
         return true;
     }
 
-    public boolean addStockToPool(){
+    public boolean addStockToPool(PoolDetailCreateReq poolDetailCreateReq){
+        // 判断股票池中是否已有该股票
+        if(poolMapper.findOneStock(poolDetailCreateReq.getPoolId(), poolDetailCreateReq.getStockId()) != null)
+            return false;
+        // 加入
+        PoolDetailPO po = new PoolDetailPO();
+        po.setPool_id(poolDetailCreateReq.getPoolId());
+        po.setStock_id(poolDetailCreateReq.getStockId());
+        po.setStrategy_id(poolDetailCreateReq.getStrategyId());
+        poolMapper.insertStockToPool(po);
         return true;
     }
 
-    public List<StockPoolPO> getUserPoolList(Integer userId){
-        return poolMapper.findAll(userId);
+    public List<StockPoolVO> getUserPoolList(Integer userId){
+        // 获取列表
+        List<StockPoolPO> pos = poolMapper.findAll(userId);
+        // 转换为 VO
+        List<StockPoolVO> vos = new ArrayList<>();
+        for (StockPoolPO po : pos) {
+            StockPoolVO tmp = new StockPoolVO();
+            tmp.setId(po.getId());
+            tmp.setUser_id(po.getUser_id());
+            tmp.setPool_name(po.getPool_name());
+            tmp.setCondition(po.getCondition());
+            vos.add(tmp);
+        }
+        return vos;
     }
 
-    public List<PoolDetailPO> getPoolStockList(Integer poolId){
-        return poolMapper.findAllTips(poolId);
+    public List<PoolDetailVO> getPoolStockList(Integer poolId){
+        // 获取列表
+        List<PoolDetailPO> pos = poolMapper.findAllTips(poolId);
+        // 转换为 VO
+        List<PoolDetailVO> vos = new ArrayList<>();
+        // todo
+        return vos;
     }
 
     public StockVO getPoolStock(){

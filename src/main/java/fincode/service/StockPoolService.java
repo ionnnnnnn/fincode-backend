@@ -1,6 +1,7 @@
 package fincode.service;
 
 import fincode.model.*;
+import fincode.model.req.stockPool.PoolDetailCreateReq;
 import fincode.model.req.stockPool.StockPoolCreateReq;
 import fincode.model.req.stockPool.StockPoolDeleteReq;
 
@@ -18,13 +19,13 @@ public interface StockPoolService {
     boolean deletePool(StockPoolDeleteReq stockPoolDeleteReq);
 
     // 将股票加入股票池
-    boolean addStockToPool();
+    boolean addStockToPool(PoolDetailCreateReq poolDetailCreateReq);
 
     // 获取用户所有股票池
-    List<StockPoolPO> getUserPoolList(Integer userId);
+    List<StockPoolVO> getUserPoolList(Integer userId);
 
     // 获取股票池中所有股票
-    List<PoolDetailPO> getPoolStockList(Integer poolId);
+    List<PoolDetailVO> getPoolStockList(Integer poolId);
 
     // 获取股票池中一支股票
     StockVO getPoolStock();
