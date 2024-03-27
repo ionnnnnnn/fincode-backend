@@ -28,6 +28,7 @@ public class StockPoolServiceImpl implements StockPoolService {
     private StockMapper stockMapper;
 
 
+    @Override
     public boolean createPool(StockPoolCreateReq stockPoolCreateReq){
         StockPoolPO stockPoolPO = new StockPoolPO();
         stockPoolPO.setUser_id(stockPoolCreateReq.getUser_id());
@@ -38,6 +39,7 @@ public class StockPoolServiceImpl implements StockPoolService {
         return true;
     }
 
+    @Override
     public boolean deletePool(StockPoolDeleteReq stockPoolDeleteReq){
         // 判断该用户是否拥有该股票池
         if(poolMapper.findOne(stockPoolDeleteReq.getUser_id(), stockPoolDeleteReq.getPool_id()) == null)
@@ -47,6 +49,7 @@ public class StockPoolServiceImpl implements StockPoolService {
         return true;
     }
 
+    @Override
     public boolean addStockToPool(PoolDetailCreateReq poolDetailCreateReq){
         // 判断股票池中是否已有该股票
         if(poolMapper.findOneStock(poolDetailCreateReq.getPoolId(), poolDetailCreateReq.getStockId()) != null)
@@ -60,6 +63,7 @@ public class StockPoolServiceImpl implements StockPoolService {
         return true;
     }
 
+    @Override
     public List<StockPoolVO> getUserPoolList(Integer userId){
         // 获取列表
         List<StockPoolPO> pos = poolMapper.findAll(userId);
@@ -76,16 +80,14 @@ public class StockPoolServiceImpl implements StockPoolService {
         return vos;
     }
 
-    public List<PoolDetailVO> getPoolStockList(Integer poolId){
+    @Override
+    public List<StockPoolDetailVO> getPoolStockList(Integer poolId){
         // 获取列表
         List<PoolDetailPO> pos = poolMapper.findAllTips(poolId);
         // 转换为 VO
-        List<PoolDetailVO> vos = new ArrayList<>();
+        List<StockPoolDetailVO> vos = new ArrayList<>();
         // todo
         return vos;
     }
 
-    public StockVO getPoolStock(){
-        return null;
-    }
 }

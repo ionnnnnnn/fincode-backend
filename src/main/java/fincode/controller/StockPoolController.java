@@ -1,9 +1,8 @@
 package fincode.controller;
 
 import fincode.model.ResultVO;
+import fincode.model.StockPoolDetailVO;
 import fincode.model.StockPoolVO;
-import fincode.model.req.pool.PoolCreateReq;
-import fincode.model.req.pool.PoolDeleteReq;
 import fincode.model.req.stockPool.StockPoolCreateReq;
 import fincode.model.req.stockPool.StockPoolDeleteReq;
 import fincode.service.StockPoolService;
@@ -13,9 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -53,6 +49,11 @@ public class StockPoolController {
     @PostMapping("/pool-list")
     public ResultVO<List<StockPoolVO>> getUserPoolList(@RequestParam Integer userId) {
         return new ResultVO<>(0, "成功", stockPoolService.getUserPoolList(userId));
+    }
+
+    @PostMapping("/stock-list")
+    public ResultVO<List<StockPoolDetailVO>> getPoolStockList() {
+        return null;
     }
 
 

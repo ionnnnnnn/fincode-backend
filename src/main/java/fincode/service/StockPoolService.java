@@ -25,10 +25,5 @@ public interface StockPoolService {
     List<StockPoolVO> getUserPoolList(Integer userId);
 
     // 获取股票池中所有股票
-    List<PoolDetailVO> getPoolStockList(Integer poolId);
-
-    // 获取股票池中一支股票
-    StockVO getPoolStock();
-
-
+    List<StockPoolDetailVO> getPoolStockList(Integer poolId);
 }
