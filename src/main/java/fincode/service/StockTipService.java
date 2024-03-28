@@ -24,4 +24,6 @@ public interface StockTipService {
 
     StockWithStrategyTipInfo getPeriodRate(int stockId, int strategyId, int startDate, int endDate);
 
+    // 用于股票池
+    StockTipLatestInfo getLatest(Integer stockId, Integer strategyId);
 }

@@ -17,7 +17,7 @@ public class StockPoolDetailVO {
 
     private Integer strategy_id;
 
-    private StockVO stockVO;
+    private StockDetailVO stockDetailVO;
 
-    private StrategyVO strategyVO;
+    private StockTipLatestInfo stockTipLatestInfo;
 }

@@ -84,9 +84,17 @@ public class StockPoolServiceImpl implements StockPoolService {
     public List<StockPoolDetailVO> getPoolStockList(Integer poolId){
         // 获取列表
         List<PoolDetailPO> pos = poolMapper.findAllTips(poolId);
-        // 转换为 VO
+        // 转换为 StockPoolDetailVO
         List<StockPoolDetailVO> vos = new ArrayList<>();
-        // todo
+        for(PoolDetailPO po : pos) {
+            StockPoolDetailVO tmp = new StockPoolDetailVO();
+            tmp.setPool_id(po.getPool_id());
+            tmp.setStock_id(po.getStock_id());
+            tmp.setStrategy_id(po.getStrategy_id());
+            StockDetailVO stockDetailVO = new StockDetailVO(stockMapper.searchDetailById(tmp.getStock_id()));
+            tmp.setStockDetailVO(stockDetailVO);
+            vos.add(tmp);
+        }
         return vos;
     }
 

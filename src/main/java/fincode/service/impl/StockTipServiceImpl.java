@@ -122,6 +122,16 @@ public class StockTipServiceImpl implements StockTipService {
     }
 
     @Override
+    public StockTipLatestInfo getLatest(Integer stockId, Integer strategyId) {
+        List<Integer> stockList = new ArrayList<>();
+        stockList.add(stockId);
+        List<Integer> strategyList = new ArrayList<>();
+        strategyList.add(strategyId);
+        // 可能 null
+        return listLatest(stockList, strategyList).get(0);
+    }
+
+    @Override
     public List<StockTipLatestInfo> listLatest(List<Integer> stockIdList, List<Integer> strategyIdList) {
         HashMap<Integer, List<StockTipDailyPO>> stockStrategyTipMap = getStrategyTipMap(stockIdList, strategyIdList);
         // 按StockId分组组装返回结果Info

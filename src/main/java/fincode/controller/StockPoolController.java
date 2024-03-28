@@ -6,12 +6,13 @@ import fincode.model.StockPoolVO;
 import fincode.model.req.stockPool.StockPoolCreateReq;
 import fincode.model.req.stockPool.StockPoolDeleteReq;
 import fincode.service.StockPoolService;
-import fincode.service.StockService;
+import fincode.service.StockTipService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,9 @@ public class StockPoolController {
 
     @Resource
     private StockPoolService stockPoolService;
+
+    @Resource
+    private StockTipService stockTipService;
 
     // 用户创建股票池
     @PostMapping("/create")
@@ -52,8 +56,15 @@ public class StockPoolController {
     }
 
     @PostMapping("/stock-list")
-    public ResultVO<List<StockPoolDetailVO>> getPoolStockList() {
-        return null;
+    public ResultVO<List<StockPoolDetailVO>> getPoolStockList(@RequestParam Integer pooId) {
+        List<StockPoolDetailVO> list = stockPoolService.getPoolStockList(pooId);
+        List<StockPoolDetailVO> stockPoolDetailVOList = new ArrayList<>();
+        for(StockPoolDetailVO vo : list) {
+            // tip可能是null
+            vo.setStockTipLatestInfo(stockTipService.getLatest(vo.getStock_id(), vo.getStrategy_id()));
+            stockPoolDetailVOList.add(vo);
+        }
+        return new ResultVO<>(0, "成功", stockPoolDetailVOList);
     }
 
 
